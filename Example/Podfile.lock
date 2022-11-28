@@ -1,0 +1,16 @@
+PODS:
+  - NSLayoutKid (1.0.0)
+
+DEPENDENCIES:
+  - NSLayoutKid (from `../`)
+
+EXTERNAL SOURCES:
+  NSLayoutKid:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  NSLayoutKid: d050a1f6a961a9369f8ad666155b9bd09a48b742
+
+PODFILE CHECKSUM: 212071426cf7780f929c9237e48ecef39e5b723d
+
+COCOAPODS: 1.11.3

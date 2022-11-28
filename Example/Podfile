@@ -1,0 +1,18 @@
+use_frameworks!
+
+platform :ios, '13.0'
+
+target 'NSLayoutKid_Example' do
+  pod 'NSLayoutKid', :path => '../'
+
+  target 'NSLayoutKid_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
+
+# Installing RxCocoa (6.2.0)
+# Installing RxRelay (6.2.0)
+# Installing RxSwift (6.2.0)
+# Installing RxSwiftExt (6.0.1)
