@@ -54,7 +54,7 @@ mainView.anchorToSuperView(axes: .bottom)
 ```swift
 mainView.addSubview(mainButton)
 mainButton.anchor(dimension: .height, constant: 50)
-mainView.anchorToSuperView(axes: .bottom, insets: .init(x: 16, y: 40))
+mainButton.anchorToSuperView(axes: .bottom, insets: .init(x: 16, y: 40))
 ```
 
 ## Axis Anchor
