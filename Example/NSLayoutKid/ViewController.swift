@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         
         let scrollView = StackContentScrollView().apply({
             $0.set(masksToBounds: false)
-            $0.stackView.updateAnchorToSuperView(insets: .create(inset: 16, top: 32, bottom: 40))
+            $0.stackView.updateAnchorToSuperView(insets: .init(inset: 16, top: 32, bottom: 40))
         })
         view.backgroundColor = .grey02
         view.addSubview(scrollView)

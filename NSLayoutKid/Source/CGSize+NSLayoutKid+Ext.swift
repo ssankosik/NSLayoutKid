@@ -1,7 +1,7 @@
 import UIKit
 
 extension CGSize {
-    init(side: CGFloat) {
+    public init(side: CGFloat) {
         self.init(width: side, height: side)
     }
 }

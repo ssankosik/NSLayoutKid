@@ -1,7 +1,7 @@
 import UIKit
 
 extension UIViewController {
-    var topSafeAreaAnchor: NSLayoutYAxisAnchor {
+    public var topSafeAreaAnchor: NSLayoutYAxisAnchor {
         if #available(iOS 11.0, *) {
             return view.safeAreaLayoutGuide.topAnchor
         } else {
@@ -9,7 +9,7 @@ extension UIViewController {
         }
     }
     
-    var bottomSafeAreaAnchor: NSLayoutYAxisAnchor {
+    public var bottomSafeAreaAnchor: NSLayoutYAxisAnchor {
         if #available(iOS 11.0, *) {
             return view.safeAreaLayoutGuide.bottomAnchor
         } else {

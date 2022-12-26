@@ -1,25 +1,21 @@
 import UIKit
 
 extension UIEdgeInsets {
-    init(inset: CGFloat) {
-        self.init(top: inset, left: inset, bottom: inset, right: inset)
-    }
-    
-    static func create(
+    public init(
         inset: CGFloat = 0,
         top: CGFloat? = nil,
         left: CGFloat? = nil,
         bottom: CGFloat? = nil,
         right: CGFloat? = nil
-    ) -> UIEdgeInsets {
-        .init(
+    ) {
+        self.init(
             top: top ?? inset,
             left: left ?? inset,
             bottom: bottom ?? inset,
             right: right ?? inset)
     }
     
-    var horizontal: CGFloat {
+    public var horizontal: CGFloat {
         get {
             left + right
         }
@@ -30,7 +26,7 @@ extension UIEdgeInsets {
         }
     }
     
-    var vertical: CGFloat {
+    public var vertical: CGFloat {
         get {
             top + bottom
         }
@@ -41,16 +37,14 @@ extension UIEdgeInsets {
         }
     }
     
-    init(horizontal: CGFloat, vertical: CGFloat) {
-        self.init(top: vertical / 2, left: horizontal / 2, bottom: vertical / 2, right: horizontal / 2)
-    }
-    
-    static func create(
+    public init(
         horizontal: CGFloat = 0,
         vertical: CGFloat = 0
-    ) -> UIEdgeInsets {
-        .init(
-            horizontal: horizontal,
-            vertical: vertical)
+    ) {
+        self.init(
+            top: vertical / 2,
+            left: horizontal / 2,
+            bottom: vertical / 2,
+            right: horizontal / 2)
     }
 }

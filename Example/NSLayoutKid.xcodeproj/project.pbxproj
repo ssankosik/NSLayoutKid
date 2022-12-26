@@ -14,9 +14,6 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		6951D13275FE534E3F326B93 /* Pods_NSLayoutKid_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657B30A6D6429543122A16ED /* Pods_NSLayoutKid_Tests.framework */; };
-		B2137986291EB11A00B4E994 /* UIEdgeInsets+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2137985291EB11A00B4E994 /* UIEdgeInsets+Ext.swift */; };
-		B2137988291EB12800B4E994 /* CGSize+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2137987291EB12800B4E994 /* CGSize+Ext.swift */; };
-		B2137990291EB3BE00B4E994 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B213798F291EB3BE00B4E994 /* UIViewController+Ext.swift */; };
 		B2137992291EB44E00B4E994 /* StackContentScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2137991291EB44E00B4E994 /* StackContentScrollView.swift */; };
 		B2137994291EB54600B4E994 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2137993291EB54600B4E994 /* UIView+Ext.swift */; };
 		B2137998291EC65300B4E994 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2137997291EC65300B4E994 /* UIStackView+Ext.swift */; };
@@ -58,9 +55,6 @@
 		A2588725679ACB20775AEA2E /* Pods-NSLayoutKid_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NSLayoutKid_Tests.debug.xcconfig"; path = "Target Support Files/Pods-NSLayoutKid_Tests/Pods-NSLayoutKid_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		ACEE1C2E4C63C4973EAD180D /* Pods-NSLayoutKid_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NSLayoutKid_Example.release.xcconfig"; path = "Target Support Files/Pods-NSLayoutKid_Example/Pods-NSLayoutKid_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AF52CFA6F242E004F121A0AE /* Pods_NSLayoutKid_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NSLayoutKid_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2137985291EB11A00B4E994 /* UIEdgeInsets+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Ext.swift"; sourceTree = "<group>"; };
-		B2137987291EB12800B4E994 /* CGSize+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Ext.swift"; sourceTree = "<group>"; };
-		B213798F291EB3BE00B4E994 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		B2137991291EB44E00B4E994 /* StackContentScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackContentScrollView.swift; sourceTree = "<group>"; };
 		B2137993291EB54600B4E994 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		B2137997291EC65300B4E994 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
@@ -185,9 +179,6 @@
 		B2137989291EB14F00B4E994 /* Ext */ = {
 			isa = PBXGroup;
 			children = (
-				B2137987291EB12800B4E994 /* CGSize+Ext.swift */,
-				B2137985291EB11A00B4E994 /* UIEdgeInsets+Ext.swift */,
-				B213798F291EB3BE00B4E994 /* UIViewController+Ext.swift */,
 				B2137997291EC65300B4E994 /* UIStackView+Ext.swift */,
 				B2137993291EB54600B4E994 /* UIView+Ext.swift */,
 				B21379A0291EC6D500B4E994 /* UIColor+Ext.swift */,
@@ -406,7 +397,6 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				B21379A1291EC6D500B4E994 /* UIColor+Ext.swift in Sources */,
-				B2137986291EB11A00B4E994 /* UIEdgeInsets+Ext.swift in Sources */,
 				B2137992291EB44E00B4E994 /* StackContentScrollView.swift in Sources */,
 				B2137998291EC65300B4E994 /* UIStackView+Ext.swift in Sources */,
 				B213799D291EC69500B4E994 /* CardView.swift in Sources */,
@@ -415,8 +405,6 @@
 				B213799B291EC66E00B4E994 /* Apply.swift in Sources */,
 				B2A769B22933DF49002C01B9 /* Int+Ext.swift in Sources */,
 				B2137994291EB54600B4E994 /* UIView+Ext.swift in Sources */,
-				B2137988291EB12800B4E994 /* CGSize+Ext.swift in Sources */,
-				B2137990291EB3BE00B4E994 /* UIViewController+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
