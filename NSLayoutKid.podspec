@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name             = 'NSLayoutKid'
-  s.version          = '1.0.0'
+  s.version          = '1.1.0'
   s.summary          = 'NSLayoutConstraint operators not found in the core distribtion'
   s.description      = <<-DESC
-  A collection of operators for RxSwift adding commonly requested operations not found in the core distribution
-    of RxSwift.
+  A collection of operators for NSLayoutConstraint adding commonly requested operations not found in the core distribution
+    of NSLayoutConstraint.
                        DESC
   s.homepage         = 'https://github.com/ssankosik/NSLayoutKid'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
