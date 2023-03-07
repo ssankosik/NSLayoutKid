@@ -1,48 +1,33 @@
 import UIKit
 
-extension UIView {
+// MARK: - Core
+extension UILayoutAnchorable {
     @discardableResult
-    func anchor<T: NSLayoutConstraintAttributeConvertable>(
-        attribute: T,
+    func anchor(
+        attribute fromAttribute: NSLayoutConstraintAttributeConvertable,
         relation: NSLayoutConstraint.Relation = .equal,
-        to item: UILayoutAnchorable? = nil,
-        attribute itemAttribute: T? = nil,
+        to toItem: UILayoutAnchorable? = nil,
+        attribute toAttribute: NSLayoutConstraintAttributeConvertable,
         multiplier: CGFloat = 1,
         constant: CGFloat = 0,
         priority: UILayoutPriority = .required
     ) -> NSLayoutConstraint? {
-        translatesAutoresizingMaskIntoConstraints = false
-        return .init(
+        view?.translatesAutoresizingMaskIntoConstraints = false
+        let layoutConstraint: NSLayoutConstraint = .init(
             item: self,
-            attribute: attribute.attribute,
+            attribute: fromAttribute.attribute,
             relatedBy: relation,
-            toItem: item,
-            attribute: item == nil ? .notAnAttribute : itemAttribute?.attribute ?? attribute.attribute,
+            toItem: toItem,
+            attribute: toAttribute.attribute,
             multiplier: multiplier,
             constant: constant)
-        .apply({
-            $0.priority = priority
-            $0.isActive = true
-        })
+        layoutConstraint.priority = priority
+        layoutConstraint.isActive = true
+        return layoutConstraint
     }
     
-    func update(
-        layoutConstraint: NSLayoutConstraint,
-        constant: CGFloat? = nil,
-        priority: UILayoutPriority? = nil
-    ) {
-        if let constant = constant {
-            layoutConstraint.constant = constant
-        }
-        if let priority = priority {
-            layoutConstraint.priority = priority
-        }
-    }
-}
-
-extension UIView {
-    private func getView(item: UILayoutAnchorable) -> UIView? {
-        switch item {
+    private var view: UIView? {
+        switch self {
         case let item as UIView:
             return item
         case let item as UILayoutGuide:
@@ -52,57 +37,182 @@ extension UIView {
         }
     }
     
-    public func getLayoutConstraint(
-        axis: NSLayoutKid.Axis,
-        relation: NSLayoutConstraint.Relation = .equal,
-        to item: UILayoutAnchorable,
-        axis itemAxis: NSLayoutKid.Axis? = nil
-    ) -> NSLayoutConstraint? {
-        var attributes: [NSLayoutConstraint.Attribute] = [axis.attribute]
-        switch axis {
-        case .right:
-            attributes += [.trailing]
-        case .left:
-            attributes += [.leading]
+    private var sourceView: UIView? {
+        switch self {
+        case let view as UIView:
+            return view.superview
+        case let view as UILayoutGuide:
+            return view.owningView
         default:
-            break
+            return nil
         }
-        return attributes
-            .compactMap({ attribute in
-                superview.flatMap({ superview in
-                    superview.constraints.first(where: { constraint in
-                        guard
-                            let firstView = constraint.firstView,
-                            let secondView = constraint.secondView
-                        else {
-                            return false
-                        }
-                        let views: [UIView] = [self, item].compactMap({ getView(item: $0) })
-                        return views.contains(firstView)
-                            && constraint.firstAttribute == attribute
-                            && constraint.relation == relation
-                            && views.contains(secondView)
-                            && constraint.secondAttribute == itemAxis?.attribute ?? attribute
-                    })
-                })
-            })
-            .first
+    }
+}
+
+// MARK: - Axis
+extension UILayoutAnchorable {
+    private func getLayoutConstraint(
+        from fromItem: UILayoutAnchorable,
+        axis fromAxis: NSLayoutKid.Axis,
+        relation: NSLayoutConstraint.Relation?,
+        to toItem: UILayoutAnchorable,
+        axis toAxis: NSLayoutKid.Axis,
+        constant: CGFloat?,
+        priority: UILayoutPriority?
+    ) -> (layoutConstraint: NSLayoutConstraint, isReverse: Bool)? {
+        guard let view = sourceView else { return nil }
+        let fromView = fromItem.view
+        let toView = toItem.view
+        let fromAttribute = fromAxis.attribute
+        let toAttribute = toAxis.attribute
+        for constraint in view.constraints {
+            guard
+                let firstView = constraint.firstView,
+                let secondView = constraint.secondView
+            else {
+                continue
+            }
+            if let relation = relation, constraint.relation != relation {
+                continue
+            }
+            if let constant = constant, constraint.constant != constant {
+                continue
+            }
+            if let priority = priority, constraint.priority != priority {
+                continue
+            }
+            let firstAttribute = constraint.firstAttribute.safeAttribute
+            let secondAttribute = constraint.secondAttribute.safeAttribute
+            if firstView == fromView,
+                firstAttribute == fromAttribute,
+                secondView == toView,
+                secondAttribute == toAttribute {
+                return (constraint, true)
+            } else if firstView == toView,
+                firstAttribute == toAttribute,
+                secondView == fromView,
+                secondAttribute == fromAttribute {
+                return (constraint, false)
+            } else {
+                continue
+            }
+        }
+        return nil
     }
     
     public func getLayoutConstraint(
-        dimension: NSLayoutConstraint.Attribute,
-        relation: NSLayoutConstraint.Relation,
-        to item: UILayoutAnchorable? = nil,
-        dimension itemDimension: NSLayoutConstraint.Attribute? = nil
+        axis fromAxis: NSLayoutKid.Axis,
+        relation: NSLayoutConstraint.Relation?,
+        to toItem: UILayoutAnchorable,
+        axis toAxis: NSLayoutKid.Axis,
+        constant: CGFloat?,
+        priority: UILayoutPriority?
+    ) -> (layoutConstraint: NSLayoutConstraint, isReverse: Bool)? {
+        for view in [self, toItem] {
+            if let result = view.getLayoutConstraint(
+                from: self,
+                axis: fromAxis,
+                relation: relation,
+                to: toItem,
+                axis: toAxis,
+                constant: constant,
+                priority: priority
+            ) {
+                return result
+            } else {
+                continue
+            }
+        }
+        return nil
+    }
+}
+
+// MARK: - Dimension
+extension UILayoutAnchorable {
+    private func getLayoutConstraint(
+        from fromItem: UILayoutAnchorable,
+        dimension fromDimension: NSLayoutKid.Dimension,
+        relation: NSLayoutConstraint.Relation?,
+        to toItem: UILayoutAnchorable? = nil,
+        dimension toDimension: NSLayoutKid.Dimension,
+        multiplier: CGFloat?,
+        constant: CGFloat?,
+        priority: UILayoutPriority?
     ) -> NSLayoutConstraint? {
-        (item.isNotNil ? superview : self).flatMap({
-            $0.constraints.first(where: { constraint in
-                constraint.firstView == self
-                    && constraint.firstAttribute == dimension
-                    && constraint.relation == relation
-                && constraint.secondView == item.flatMap({ getView(item: $0)  })
-                    && constraint.secondAttribute == (item.isNotNil ? itemDimension ?? dimension : .notAnAttribute)
-            })
-        })
+        guard let view = toItem.isNotNil ? sourceView : view else { return nil }
+        let fromView = fromItem.view
+        let toView = toItem?.view
+        let fromAttribute = fromDimension.attribute
+        let toAttribute = (toItem.isNotNil ? toDimension.attribute : .notAnAttribute)
+        for constraint in view.constraints {
+            guard
+                let firstView = constraint.firstView,
+                toItem.isNotNil ? constraint.secondView.isNotNil : true
+            else {
+                continue
+            }
+            if let relation = relation, constraint.relation != relation {
+                continue
+            }
+            if let multiplier = multiplier, constraint.multiplier != multiplier {
+                continue
+            }
+            if let constant = constant, constraint.constant != constant {
+                continue
+            }
+            if let priority = priority, constraint.priority != priority {
+                continue
+            }
+            let secondView = constraint.secondView
+            let firstAttribute = constraint.firstAttribute
+            let secondAttribute = constraint.secondAttribute
+            if firstView == fromView,
+               firstAttribute == fromAttribute,
+               secondView == toView,
+               secondAttribute == toAttribute {
+                return constraint
+            } else if
+                firstView == toView,
+                firstAttribute == toAttribute,
+                secondView == fromView,
+                secondAttribute == fromAttribute {
+                return constraint
+            } else {
+                continue
+            }
+        }
+        return nil
+    }
+
+    public func getLayoutConstraint(
+        dimension fromDimension: NSLayoutKid.Dimension,
+        relation: NSLayoutConstraint.Relation?,
+        to toItem: UILayoutAnchorable? = nil,
+        dimension toDimension: NSLayoutKid.Dimension,
+        multiplier: CGFloat?,
+        constant: CGFloat?,
+        priority: UILayoutPriority?
+    ) -> NSLayoutConstraint? {
+        var items: [UILayoutAnchorable] = [self]
+        if let item = toItem {
+            items.append(item)
+        }
+        for view in items {
+            if let result = view.getLayoutConstraint(
+                from: self,
+                dimension: fromDimension,
+                relation: relation,
+                to: toItem,
+                dimension: toDimension,
+                multiplier: multiplier,
+                constant: constant,
+                priority: priority
+            ) {
+                return result
+            } else {
+                continue
+            }
+        }
+        return nil
     }
 }

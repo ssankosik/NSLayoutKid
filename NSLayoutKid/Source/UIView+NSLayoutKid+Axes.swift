@@ -1,51 +1,67 @@
 import UIKit
 
 // MARK: - Self
-extension UIView {
+extension UILayoutAnchorable {
     @discardableResult
     public func anchor(
-        axes: NSLayoutKid.Axes = .all,
+        axes fromAxes: NSLayoutKid.Axes = .all,
         relation: NSLayoutConstraint.Relation = .equal,
-        to item: UILayoutAnchorable,
-        insets: UIEdgeInsets = .zero
+        to toItem: UILayoutAnchorable,
+        insets: UIEdgeInsets = .zero,
+        priority: UILayoutPriority = .required
     ) -> [NSLayoutKid.Axis: NSLayoutConstraint?] {
-        .init(uniqueKeysWithValues: axes.axes.compactMap({
-            ($0, anchor(
-                axis: $0,
-                relation: relation,
-                to: item,
-                constant: $0.getConstant(from: insets)))
-        }))
+        let result = fromAxes.axes
+            .compactMap({
+                ($0, self.anchor(
+                    axis: $0,
+                    relation: relation,
+                    to: toItem,
+                    constant: insets.getInset(axis: $0),
+                    priority: priority))
+            })
+        return .init(uniqueKeysWithValues: result)
     }
     
     @discardableResult
     public func updateAnchor(
-        axes: NSLayoutKid.Axes = .all,
-        relation: NSLayoutConstraint.Relation = .equal,
-        to item: UILayoutAnchorable,
-        insets: UIEdgeInsets = .zero
+        axes fromAxes: NSLayoutKid.Axes = .all,
+        relation: NSLayoutConstraint.Relation? = nil,
+        to toItem: UILayoutAnchorable,
+        insets: UIEdgeInsets? = nil,
+        priority: UILayoutPriority? = nil,
+        toInsets: UIEdgeInsets? = nil,
+        toPriority: UILayoutPriority? = nil
     ) -> [NSLayoutKid.Axis: NSLayoutConstraint?] {
-        .init(uniqueKeysWithValues: axes.axes.compactMap({
-            ($0, updateAnchor(
+        let result = fromAxes.axes.compactMap({
+            ($0, self.updateAnchor(
                 axis: $0,
                 relation: relation,
-                to: item,
-                constant: $0.getConstant(from: insets)))
-        }))
+                to: toItem,
+                constant: insets?.getInset(axis: $0),
+                priority: priority,
+                toConstant: toInsets?.getInset(axis: $0),
+                toPriority: toPriority))
+        })
+        return .init(uniqueKeysWithValues: result)
     }
     
+    @discardableResult
     public func removeAnchor(
-        axes: NSLayoutKid.Axes = .all,
-        relation: NSLayoutConstraint.Relation = .equal,
-        to item: UILayoutAnchorable
-    ) {
-        axes.axes.forEach({
-            removeAnchor(
+        axes fromAxes: NSLayoutKid.Axes = .all,
+        relation: NSLayoutConstraint.Relation? = nil,
+        to toItem: UILayoutAnchorable,
+        insets: UIEdgeInsets? = nil,
+        priority: UILayoutPriority? = nil
+    ) -> [NSLayoutKid.Axis: NSLayoutConstraint?] {
+        let result = fromAxes.axes.compactMap({
+            ($0, self.removeAnchor(
                 axis: $0,
                 relation: relation,
-                to: item,
-                axis: $0)
+                to: toItem,
+                constant: insets?.getInset(axis: $0),
+                priority: priority))
         })
+        return .init(uniqueKeysWithValues: result)
     }
 }
 
@@ -53,46 +69,53 @@ extension UIView {
 extension UIView {
     @discardableResult
     public func anchorToSuperView(
-        axes: NSLayoutKid.Axes = .all,
+        axes fromAxes: NSLayoutKid.Axes = .all,
         relation: NSLayoutConstraint.Relation = .equal,
-        insets: UIEdgeInsets = .zero
+        insets: UIEdgeInsets = .zero,
+        priority: UILayoutPriority = .required
     ) -> [NSLayoutKid.Axis: NSLayoutConstraint?]? {
-        superview.flatMap({
-            anchor(
-                axes: axes,
-                relation: relation,
-                to: $0,
-                insets: insets)
-        })
+        guard let superview = superview else { return nil }
+        return anchor(
+            axes: fromAxes,
+            relation: relation,
+            to: superview,
+            insets: insets,
+            priority: priority)
     }
     
     @discardableResult
     public func updateAnchorToSuperView(
-        axes: NSLayoutKid.Axes = .all,
-        relation: NSLayoutConstraint.Relation = .equal,
-        insets: UIEdgeInsets = .zero
+        axes fromAxes: NSLayoutKid.Axes = .all,
+        relation: NSLayoutConstraint.Relation? = nil,
+        insets: UIEdgeInsets? = nil,
+        priority: UILayoutPriority? = nil,
+        toInsets: UIEdgeInsets? = nil,
+        toPriority: UILayoutPriority? = nil
     ) -> [NSLayoutKid.Axis: NSLayoutConstraint?]? {
-        superview.flatMap({
-            updateAnchor(
-                axes: axes,
-                relation: relation,
-                to: $0,
-                insets: insets)
-        })
+        guard let superview = superview else { return nil }
+        return updateAnchor(
+            axes: fromAxes,
+            relation: relation,
+            to: superview,
+            insets: insets,
+            priority: priority,
+            toInsets: toInsets,
+            toPriority: toPriority)
     }
     
+    @discardableResult
     public func removeAnchorToSuperView(
-        axes: NSLayoutKid.Axes = .all,
-        relation: NSLayoutConstraint.Relation = .equal
-    ) {
-        superview.flatMap({ view in
-            axes.axes.forEach({
-                removeAnchor(
-                    axis: $0,
-                    relation: relation,
-                    to: view,
-                    axis: $0)
-            })
-        })
+        axes fromAxes: NSLayoutKid.Axes = .all,
+        relation: NSLayoutConstraint.Relation? = nil,
+        insets: UIEdgeInsets? = nil,
+        priority: UILayoutPriority? = nil
+    ) -> [NSLayoutKid.Axis: NSLayoutConstraint?]? {
+        guard let superview = superview else { return nil }
+        return removeAnchor(
+            axes: fromAxes,
+            relation: relation,
+            to: superview,
+            insets: insets,
+            priority: priority)
     }
 }

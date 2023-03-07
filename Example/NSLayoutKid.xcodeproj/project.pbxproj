@@ -36,7 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		066161CB5B507BA9B4DC9651 /* NSLayoutKid.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NSLayoutKid.podspec; path = ../NSLayoutKid.podspec; sourceTree = "<group>"; };
+		066161CB5B507BA9B4DC9651 /* NSLayoutKid.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NSLayoutKid.podspec; path = ../NSLayoutKid.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		095C2A9EE73EC1D4421E1031 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		244C6E0AE16D65ED16C84C91 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		5B3CE602AC3C2932F509B7A5 /* Pods-NSLayoutKid_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NSLayoutKid_Example.debug.xcconfig"; path = "Target Support Files/Pods-NSLayoutKid_Example/Pods-NSLayoutKid_Example.debug.xcconfig"; sourceTree = "<group>"; };

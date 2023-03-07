@@ -1,6 +1,20 @@
 import UIKit
 
 extension UIEdgeInsets {
+    public var inset: CGFloat? {
+        get {
+            (top == left) && (top == bottom) && (top == right) ? top : nil
+        }
+        
+        set {
+            guard let newValue = newValue else { return }
+            top = newValue
+            left = newValue
+            bottom = newValue
+            right = newValue
+        }
+    }
+    
     public init(
         inset: CGFloat = 0,
         top: CGFloat? = nil,

@@ -1,60 +1,77 @@
 import UIKit
 
 // MARK: - Self
-extension UIView {
-    // Axis
+extension UILayoutAnchorable {
     @discardableResult
     public func anchor(
-        axis: NSLayoutKid.Axis,
+        axis fromAxis: NSLayoutKid.Axis,
         relation: NSLayoutConstraint.Relation = .equal,
-        to item: UILayoutAnchorable,
-        axis itemAxis: NSLayoutKid.Axis? = nil,
+        to toItem: UILayoutAnchorable,
+        axis toAxis: NSLayoutKid.Axis? = nil,
         constant: CGFloat = 0,
         priority: UILayoutPriority = .required
     ) -> NSLayoutConstraint? {
-        anchor(
-            attribute: axis,
-            relation: axis.getTranslateRelation(with: relation),
-            to: item,
-            attribute: itemAxis,
-            constant: axis.getTranslateConstant(with: constant),
+        let toAxis = toAxis ?? fromAxis
+        return anchor(
+            attribute: fromAxis,
+            relation: relation.getTranslated(axis: fromAxis),
+            to: toItem,
+            attribute: toAxis,
+            constant: constant.getTranslated(axis: fromAxis),
             priority: priority)
     }
     
     @discardableResult
     public func updateAnchor(
-        axis: NSLayoutKid.Axis,
-        relation: NSLayoutConstraint.Relation = .equal,
-        to item: UILayoutAnchorable,
-        axis itemAxis: NSLayoutKid.Axis? = nil,
+        axis fromAxis: NSLayoutKid.Axis,
+        relation: NSLayoutConstraint.Relation? = nil,
+        to toItem: UILayoutAnchorable,
+        axis toAxis: NSLayoutKid.Axis? = nil,
+        constant: CGFloat? = nil,
+        priority: UILayoutPriority? = nil,
+        toConstant: CGFloat? = nil,
+        toPriority: UILayoutPriority? = nil
+    ) -> NSLayoutConstraint? {
+        let toAxis = toAxis ?? fromAxis
+        guard
+            let result = getLayoutConstraint(
+                axis: fromAxis,
+                relation: relation,
+                to: toItem,
+                axis: toAxis,
+                constant: constant,
+                priority: priority)
+        else {
+            return nil
+        }
+        let toConstant = toConstant?.getTranslated(axis: result.isReverse ? fromAxis : toAxis)
+        result.layoutConstraint.update(constant: toConstant, priority: toPriority)
+        return result.layoutConstraint
+    }
+
+    @discardableResult
+    public func removeAnchor(
+        axis fromAxis: NSLayoutKid.Axis,
+        relation: NSLayoutConstraint.Relation? = nil,
+        to toItem: UILayoutAnchorable,
+        axis toAxis: NSLayoutKid.Axis? = nil,
         constant: CGFloat? = nil,
         priority: UILayoutPriority? = nil
     ) -> NSLayoutConstraint? {
-        getLayoutConstraint(
-            axis: axis,
-            relation: relation,
-            to: item,
-            axis: itemAxis)
-        .flatMap({
-            update(
-                layoutConstraint: $0,
-                constant: constant.flatMap(axis.getTranslateConstant),
+        let toAxis = toAxis ?? fromAxis
+        guard
+            let result = getLayoutConstraint(
+                axis: fromAxis,
+                relation: relation,
+                to: toItem,
+                axis: toAxis,
+                constant: constant,
                 priority: priority)
-            return $0
-        })
-    }
-    
-    public func removeAnchor(
-        axis: NSLayoutKid.Axis,
-        relation: NSLayoutConstraint.Relation = .equal,
-        to item: UILayoutAnchorable,
-        axis itemAxis: NSLayoutKid.Axis? = nil
-    ) {
-        getLayoutConstraint(
-            axis: axis,
-            relation: relation,
-            to: item,
-            axis: itemAxis)?.isActive = false
+        else {
+            return nil
+        }
+        result.layoutConstraint.isActive = false
+        return result.layoutConstraint
     }
 }
 
@@ -62,53 +79,59 @@ extension UIView {
 extension UIView {
     @discardableResult
     public func anchorToSuperView(
-        axis: NSLayoutKid.Axis,
+        axis fromAxis: NSLayoutKid.Axis,
         relation: NSLayoutConstraint.Relation = .equal,
-        axis itemAxis: NSLayoutKid.Axis? = nil,
+        axis toAxis: NSLayoutKid.Axis? = nil,
         constant: CGFloat = 0,
         priority: UILayoutPriority = .required
     ) -> NSLayoutConstraint? {
-        superview.flatMap({
-            anchor(
-                axis: axis,
-                relation: relation,
-                to: $0,
-                axis: itemAxis,
-                constant: constant,
-                priority: priority)
-        })
+        guard let superview = superview else { return nil }
+        return anchor(
+            axis: fromAxis,
+            relation: relation,
+            to: superview,
+            axis: toAxis,
+            constant: constant,
+            priority: priority)
     }
     
     @discardableResult
     public func updateAnchorToSuperView(
-        axis: NSLayoutKid.Axis,
-        relation: NSLayoutConstraint.Relation = .equal,
-        axis itemAxis: NSLayoutKid.Axis? = nil,
+        axis fromAxis: NSLayoutKid.Axis,
+        relation: NSLayoutConstraint.Relation? = nil,
+        axis toAxis: NSLayoutKid.Axis? = nil,
+        constant: CGFloat? = nil,
+        priority: UILayoutPriority? = nil,
+        toConstant: CGFloat? = nil,
+        toPriority: UILayoutPriority? = nil
+    ) -> NSLayoutConstraint? {
+        guard let superview = superview else { return nil }
+        return updateAnchor(
+            axis: fromAxis,
+            relation: relation,
+            to: superview,
+            axis: toAxis,
+            constant: constant,
+            priority: priority,
+            toConstant: toConstant,
+            toPriority: toPriority)
+    }
+    
+    @discardableResult
+    public func removeAnchorToSuperView(
+        axis fromAxis: NSLayoutKid.Axis,
+        relation: NSLayoutConstraint.Relation? = nil,
+        axis toAxis: NSLayoutKid.Axis? = nil,
         constant: CGFloat? = nil,
         priority: UILayoutPriority? = nil
     ) -> NSLayoutConstraint? {
-        superview.flatMap({
-            updateAnchor(
-                axis: axis,
-                relation: relation,
-                to: $0,
-                axis: itemAxis,
-                constant: constant,
-                priority: priority)
-        })
-    }
-    
-    public func removeAnchorToSuperView(
-        axis: NSLayoutKid.Axis,
-        relation: NSLayoutConstraint.Relation = .equal,
-        axis itemAxis: NSLayoutKid.Axis? = nil
-    ) {
-        superview.flatMap({
-            getLayoutConstraint(
-                axis: axis,
-                relation: relation,
-                to: $0,
-                axis: itemAxis)?.isActive = false
-        })
+        guard let superview = superview else { return nil }
+        return removeAnchor(
+            axis: fromAxis,
+            relation: relation,
+            to: superview,
+            axis: toAxis,
+            constant: constant,
+            priority: priority)
     }
 }

@@ -1,6 +1,8 @@
 import UIKit
 
-public enum NSLayoutKid {
+public struct NSLayoutKid {
+    init() {}
+    
     public enum Axis: NSLayoutConstraintAttributeConvertable {
         // X
         case left
@@ -61,6 +63,7 @@ public enum NSLayoutKid {
     public enum Dimension: NSLayoutConstraintAttributeConvertable {
         case width
         case height
+        case notAnAttribute
     }
     
     public enum Dimensions {
@@ -96,54 +99,6 @@ extension NSLayoutKid.Axis {
             return .firstBaseline
         }
     }
-    
-    func getConstant(from insets: UIEdgeInsets) -> CGFloat {
-        switch self {
-        case .top:
-            return insets.top
-        case .right:
-            return insets.right
-        case .bottom:
-            return insets.bottom
-        case .left:
-            return insets.left
-        default:
-            return .zero
-        }
-    }
-    
-    func getTranslateConstant(with constant: CGFloat) -> CGFloat {
-        switch self {
-        case .right,
-             .bottom:
-            return -constant
-        default:
-            return constant
-        }
-    }
-    
-    func getTranslateConstant(from insets: UIEdgeInsets) -> CGFloat {
-        getTranslateConstant(with: getConstant(from: insets))
-    }
-    
-    func getTranslateRelation(with relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint.Relation {
-        switch self {
-        case .right,
-             .bottom:
-            switch relation {
-            case .lessThanOrEqual:
-                return .greaterThanOrEqual
-            case .equal:
-                return relation
-            case .greaterThanOrEqual:
-                return .lessThanOrEqual
-            @unknown default:
-                return relation
-            }
-        default:
-            return relation
-        }
-    }
 }
 
 // MARK: - Dimension
@@ -154,15 +109,8 @@ extension NSLayoutKid.Dimension {
             return .width
         case .height:
             return .height
-        }
-    }
-    
-    func getConstant(from size: CGSize) -> CGFloat {
-        switch self {
-        case .width:
-            return size.width
-        case .height:
-            return size.height
+        case .notAnAttribute:
+            return .notAnAttribute
         }
     }
 }
