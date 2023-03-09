@@ -5,7 +5,7 @@ Aside from features marked [🔥 Experimental 🔥], `NSLayoutKid` adheres to [S
 compatibility should be preserved in most cases, but cannot be guaranteed.
 on 2020-12-20. All issues associated with this milestone can be found using this [filter](https://github.com/ssankosik/NSLayoutKid/milestone/75?closed=1).
 
----
+&nbsp;
 
 ## [2.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/2.0.0)
 Released on 2024-03-09.
@@ -24,7 +24,7 @@ Released on 2024-03-09.
 - Update the parameter name of anchor functions.
   - Added by [Sasawat Sankosik](https://github.com/ssankosik).
 
----
+&nbsp;
 
 ## [1.1.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/1.1.0)
 Released on 2023-12-26.
@@ -37,7 +37,7 @@ Released on 2023-12-26.
 - UIViewController helper.
   - Added by [Sasawat Sankosik](https://github.com/ssankosik).
 
----
+&nbsp;
 
 ## [1.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/1.0.0)
 Released on 2023-02-25.
