@@ -16,13 +16,13 @@ Released on 2024-03-09.
 
 #### Updated
 - Improve retrieve the layout constraint performance.
-  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+  - Updated by [Sasawat Sankosik](https://github.com/ssankosik).
 - Support retrieve the layout constraint by reverse sentence.
-  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+  - Updated by [Sasawat Sankosik](https://github.com/ssankosik).
 - Support retrieve the layout constraint from differences hierarchy.
-  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+  - Updated by [Sasawat Sankosik](https://github.com/ssankosik).
 - Update the parameter name of anchor functions.
-  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+  - Updated by [Sasawat Sankosik](https://github.com/ssankosik).
 
 &nbsp;
 
