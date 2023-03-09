@@ -5,9 +5,43 @@ Aside from features marked [🔥 Experimental 🔥], `NSLayoutKid` adheres to [S
 compatibility should be preserved in most cases, but cannot be guaranteed.
 on 2020-12-20. All issues associated with this milestone can be found using this [filter](https://github.com/ssankosik/NSLayoutKid/milestone/75?closed=1).
 
-## [1.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/1.0.0)
-Released on 2022-02-25.
+---
+
+## [2.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/2.0.0)
+Released on 2024-03-09.
 
 #### Added
-- Initial release of Alamofire.
+- Add retrieve the layout constraint new searching criteria.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+
+#### Updated
+- Improve retrieve the layout constraint performance.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+- Support retrieve the layout constraint by reverse sentence.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+- Support retrieve the layout constraint from differences hierarchy.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+- Update the parameter name of anchor functions.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+
+---
+
+## [1.1.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/1.1.0)
+Released on 2023-12-26.
+
+#### Added
+- CGSize helper.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+- UIEdgeInsets helper.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+- UIViewController helper.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+
+---
+
+## [1.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/1.0.0)
+Released on 2023-02-25.
+
+#### Added
+- Initial release of NSLayoutKid.
   - Added by [Sasawat Sankosik](https://github.com/ssankosik).
