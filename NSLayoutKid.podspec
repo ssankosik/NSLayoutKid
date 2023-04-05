@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'NSLayoutKid'
-  s.version          = '2.0.0'
+  s.version          = '2.0.1'
   s.summary          = 'NSLayoutConstraint operators not found in the core distribtion'
   s.description      = <<-DESC
   A collection of operators for NSLayoutConstraint adding commonly requested operations not found in the core distribution
