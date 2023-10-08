@@ -1,7 +1,7 @@
 import UIKit
 
 // MARK: - Self
-extension UIView {
+extension NSLKWrapper where Base: UILayoutAnchorable {
     @discardableResult
     public func anchorDimensions(
         relation: NSLayoutConstraint.Relation = .equal,
@@ -9,8 +9,8 @@ extension UIView {
         multiplier: CGFloat = 1,
         size: CGSize = .zero,
         priority: UILayoutPriority = .required
-    ) -> [NSLayoutKid.Dimension: NSLayoutConstraint?] {
-        let result = NSLayoutKid.Dimensions.all.dimensions
+    ) -> [NSLK.Dimension: NSLayoutConstraint?] {
+        let result = NSLK.Dimensions.all.dimensions
             .compactMap({
                 ($0, self.anchor(
                     dimension: $0,
@@ -32,8 +32,8 @@ extension UIView {
         priority: UILayoutPriority? = nil,
         toSize: CGSize? = nil,
         toPriority: UILayoutPriority? = nil
-    ) -> [NSLayoutKid.Dimension: NSLayoutConstraint?] {
-        let result = NSLayoutKid.Dimensions.all.dimensions
+    ) -> [NSLK.Dimension: NSLayoutConstraint?] {
+        let result = NSLK.Dimensions.all.dimensions
             .compactMap({
                 ($0, self.updateAnchor(
                     dimension: $0,
@@ -56,8 +56,8 @@ extension UIView {
         multiplier: CGFloat? = nil,
         size: CGSize? = nil,
         priority: UILayoutPriority? = nil
-    ) -> [NSLayoutKid.Dimension: NSLayoutConstraint?] {
-        let result = NSLayoutKid.Dimensions.all.dimensions.compactMap({
+    ) -> [NSLK.Dimension: NSLayoutConstraint?] {
+        let result = NSLK.Dimensions.all.dimensions.compactMap({
             ($0, self.removeAnchor(
                 dimension: $0,
                 relation: relation,
@@ -72,15 +72,15 @@ extension UIView {
 }
 
 // MARK: - Superview
-extension UIView {
+extension NSLKWrapper where Base: UILayoutAnchorable {
     @discardableResult
     public func anchorToSuperViewDimensions(
         relation: NSLayoutConstraint.Relation = .equal,
         multiplier: CGFloat = 1,
         size: CGSize = .zero,
         priority: UILayoutPriority = .required
-    ) -> [NSLayoutKid.Dimension: NSLayoutConstraint?]? {
-        guard let superview = superview else { return nil }
+    ) -> [NSLK.Dimension: NSLayoutConstraint?]? {
+        guard let superview = base.getSuperview() else { return nil }
         return anchorDimensions(
             relation: relation,
             to: superview,
@@ -97,8 +97,8 @@ extension UIView {
         priority: UILayoutPriority? = nil,
         toSize: CGSize? = nil,
         toPriority: UILayoutPriority? = nil
-    ) -> [NSLayoutKid.Dimension: NSLayoutConstraint?]? {
-        guard let superview = superview else { return nil }
+    ) -> [NSLK.Dimension: NSLayoutConstraint?]? {
+        guard let superview = base.getSuperview() else { return nil }
         return updateAnchorDimensions(
             relation: relation,
             to: superview,
@@ -115,8 +115,8 @@ extension UIView {
         multiplier: CGFloat? = nil,
         size: CGSize? = nil,
         priority: UILayoutPriority? = nil
-    ) -> [NSLayoutKid.Dimension: NSLayoutConstraint?]? {
-        guard let superview = superview else { return nil }
+    ) -> [NSLK.Dimension: NSLayoutConstraint?]? {
+        guard let superview = base.getSuperview() else { return nil }
         return removeAnchorDimensions(
             relation: relation,
             to: superview,

@@ -3,7 +3,7 @@ import UIKit
 extension UIEdgeInsets {
     public var inset: CGFloat? {
         get {
-            (top == left) && (top == bottom) && (top == right) ? top : nil
+            [top, left, bottom, right].isAllEqual ? top : nil
         }
         
         set {
@@ -29,36 +29,55 @@ extension UIEdgeInsets {
             right: right ?? inset)
     }
     
-    public var horizontal: CGFloat {
+    public var x: CGFloat? {
         get {
-            left + right
+            [left, right].isAllEqual ? left : nil
         }
         
         set {
+            guard let newValue = newValue else { return }
             left = newValue
             right = newValue
         }
     }
     
-    public var vertical: CGFloat {
+    public var y: CGFloat? {
         get {
-            top + bottom
+            [top, bottom].isAllEqual ? top : nil
         }
         
         set {
+            guard let newValue = newValue else { return }
             top = newValue
             bottom = newValue
         }
     }
     
     public init(
-        horizontal: CGFloat = 0,
-        vertical: CGFloat = 0
+        x: CGFloat = 0,
+        y: CGFloat = 0
     ) {
         self.init(
-            top: vertical / 2,
-            left: horizontal / 2,
-            bottom: vertical / 2,
-            right: horizontal / 2)
+            top: y,
+            left: x,
+            bottom: y,
+            right: x)
+    }
+}
+
+extension UIEdgeInsets {
+    func getInset(axis: NSLK.Axis) -> CGFloat {
+        switch axis {
+        case .top:
+            return top
+        case .right:
+            return right
+        case .bottom:
+            return bottom
+        case .left:
+            return left
+        default:
+            return 0
+        }
     }
 }

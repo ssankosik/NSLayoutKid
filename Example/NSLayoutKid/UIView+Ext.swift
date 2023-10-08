@@ -42,12 +42,12 @@ extension UIView {
         
         if anchorTop || topInset != nil {
             topAnchor.constraint(
-                equalTo: viewController.topSafeAreaAnchor,
+                equalTo: viewController.view.safeAreaLayoutGuide.topAnchor,
                 constant: topInset ?? 0).isActive = true
         }
         if anchorBottom || bottomInset != nil {
             topAnchor.constraint(
-                equalTo: viewController.bottomSafeAreaAnchor,
+                equalTo: viewController.view.safeAreaLayoutGuide.bottomAnchor,
                 constant: -(bottomInset ?? 0)).isActive = true
         }
     }

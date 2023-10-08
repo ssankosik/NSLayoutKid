@@ -18,10 +18,10 @@ class StackContentScrollView: UIScrollView {
         }
         addSubview(contentView)
         contentView.addSubview(stackView)
-        contentView.anchorToSuperView()
-        contentView.anchorToSuperView(dimension: .width, priority: .required)
-        contentView.anchorToSuperView(dimension: .height, priority: .fittingSizeLevel)
-        stackView.anchorToSuperView()
+        contentView.nslk.anchorToSuperView()
+        contentView.nslk.anchorToSuperView(dimension: .width, priority: .required)
+        contentView.nslk.anchorToSuperView(dimension: .height, priority: .fittingSizeLevel)
+        stackView.nslk.anchorToSuperView()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -34,7 +34,7 @@ class StackContentScrollView: UIScrollView {
     
     func set(axis: NSLayoutConstraint.Axis) {
         stackView.axis = axis
-        contentView.updateAnchorToSuperView(dimension: .width, priority: axis == .vertical ? .required : .fittingSizeLevel)
-        contentView.updateAnchorToSuperView(dimension: .height, priority: axis == .vertical ? .fittingSizeLevel : .required)
+        contentView.nslk.updateAnchorToSuperView(dimension: .width, priority: axis == .vertical ? .required : .fittingSizeLevel)
+        contentView.nslk.updateAnchorToSuperView(dimension: .height, priority: axis == .vertical ? .fittingSizeLevel : .required)
     }
 }

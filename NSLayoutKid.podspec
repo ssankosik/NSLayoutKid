@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'NSLayoutKid'
-  s.version          = '2.0.1'
+  s.version          = '3.0.0'
   s.summary          = 'NSLayoutConstraint operators not found in the core distribtion'
   s.description      = <<-DESC
   A collection of operators for NSLayoutConstraint adding commonly requested operations not found in the core distribution
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'ssankosik' => 'https://github.com/ssankosik/NSLayoutKid' }
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
   s.swift_versions = '5.0'
 
   s.source           = { :git => 'https://github.com/ssankosik/NSLayoutKid.git', :tag => s.version }

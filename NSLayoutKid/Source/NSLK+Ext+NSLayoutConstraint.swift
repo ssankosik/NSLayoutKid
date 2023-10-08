@@ -1,28 +1,5 @@
 import UIKit
 
-// MARK: - Scope + Apply
-protocol Apply {}
-extension Apply where Self: Any {
-  @discardableResult
-  func apply(_ block: ((Self) throws -> Void)) rethrows -> Self {
-    try block(self)
-    return self
-  }
-}
-
-extension NSObject: Apply {}
-
-extension Array: Apply {}
-extension Dictionary: Apply {}
-extension Set: Apply {}
-
-extension Optional {
-    var isNil: Bool { self == nil }
-    
-    var isNotNil: Bool { self != nil }
-}
-
-// MARK: - NSLayoutConstraint + Ext
 extension NSLayoutConstraint {
     private func getView(item: AnyObject?) -> UIView? {
         switch item {
@@ -34,7 +11,7 @@ extension NSLayoutConstraint {
             return nil
         }
     }
-    
+
     var firstView: UIView? {
         getView(item: firstItem)
     }
@@ -70,7 +47,7 @@ extension NSLayoutConstraint.Attribute {
 }
 
 extension NSLayoutConstraint.Relation {
-    func getTranslated(axis: NSLayoutKid.Axis) -> NSLayoutConstraint.Relation {
+    func getTranslated(axis: NSLK.Axis) -> NSLayoutConstraint.Relation {
         switch axis {
         case .right,
              .bottom:
@@ -86,51 +63,6 @@ extension NSLayoutConstraint.Relation {
             }
         default:
             return self
-        }
-    }
-}
-
-// MARK: - UIEdgeInsets + Ext
-extension UIEdgeInsets {
-    func getInset(axis: NSLayoutKid.Axis) -> CGFloat {
-        switch axis {
-        case .top:
-            return top
-        case .right:
-            return right
-        case .bottom:
-            return bottom
-        case .left:
-            return left
-        default:
-            return 0
-        }
-    }
-}
-
-// MARK: - CGFloat + Ext
-extension CGFloat {
-    func getTranslated(axis: NSLayoutKid.Axis) -> CGFloat {
-        switch axis {
-        case .right,
-             .bottom:
-            return -self
-        default:
-            return self
-        }
-    }
-}
-
-// MARK: - CGSize + Ext
-extension CGSize {
-    func getSide(dimension: NSLayoutKid.Dimension) -> CGFloat {
-        switch dimension {
-        case .width:
-            return width
-        case .height:
-            return height
-        case .notAnAttribute:
-            return 0
         }
     }
 }
