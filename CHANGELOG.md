@@ -7,6 +7,25 @@ on 2020-12-20. All issues associated with this milestone can be found using this
 
 &nbsp;
 
+## [3.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/3.0.0)
+Released on 2024-03-09.
+
+#### Added
+- Add wrapper nslk.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+- Add unittest.
+  - Added by [Sasawat Sankosik](https://github.com/ssankosik).
+
+#### Updated
+- Bump iOS minimun version to 11.
+  - Updated by [Sasawat Sankosik](https://github.com/ssankosik).
+- Update naming.
+  - Updated by [Sasawat Sankosik](https://github.com/ssankosik).
+- Manage classes, files and folders.
+  - Updated by [Sasawat Sankosik](https://github.com/ssankosik).
+
+&nbsp;
+
 ## [2.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/2.0.0)
 Released on 2024-03-09.
 
