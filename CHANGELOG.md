@@ -7,8 +7,17 @@ on 2020-12-20. All issues associated with this milestone can be found using this
 
 &nbsp;
 
+## [3.0.1](https://github.com/ssankosik/NSLayoutKid/releases/tag/3.0.1)
+Released on 2023-10-09.
+
+#### Updated
+- Update wrapper name to lkd.
+  - Updated by [Sasawat Sankosik](https://github.com/ssankosik).
+
+&nbsp;
+
 ## [3.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/3.0.0)
-Released on 2024-03-09.
+Released on 2023-10-09.
 
 #### Added
 - Add wrapper nslk.
@@ -27,7 +36,7 @@ Released on 2024-03-09.
 &nbsp;
 
 ## [2.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/2.0.0)
-Released on 2024-03-09.
+Released on 2023-03-09.
 
 #### Added
 - Add retrieve the layout constraint new searching criteria.
@@ -46,7 +55,7 @@ Released on 2024-03-09.
 &nbsp;
 
 ## [1.1.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/1.1.0)
-Released on 2023-12-26.
+Released on 2022-12-26.
 
 #### Added
 - CGSize helper.
@@ -59,7 +68,7 @@ Released on 2023-12-26.
 &nbsp;
 
 ## [1.0.0](https://github.com/ssankosik/NSLayoutKid/releases/tag/1.0.0)
-Released on 2023-02-25.
+Released on 2022-02-25.
 
 #### Added
 - Initial release of NSLayoutKid.
