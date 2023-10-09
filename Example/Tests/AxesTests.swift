@@ -25,7 +25,7 @@ extension AxesTests {
         sut.addSubview(view)
         
         // When
-        let constraint = view.nslk.anchor(
+        let constraint = view.lkd.anchor(
             relation: relation,
             to: sut,
             insets: .init(inset: constant))
@@ -52,12 +52,12 @@ extension AxesTests {
         let constant = CGFloat(16)
         let view = UIView()
         sut.addSubview(view)
-        view.nslk.anchor(
+        view.lkd.anchor(
             to: sut,
             insets: .init(inset: constant))
         
         // When
-        let constraint = view.nslk.updateAnchor(
+        let constraint = view.lkd.updateAnchor(
             to: sut,
             toInsets: .init(inset: constant))
         
@@ -76,11 +76,11 @@ extension AxesTests {
         // Given
         let view = UIView()
         sut.addSubview(view)
-        view.nslk.anchor(to: sut)
+        view.lkd.anchor(to: sut)
         let count = sut.constraints.count
         
         // When
-        view.nslk.removeAnchor(to: sut)
+        view.lkd.removeAnchor(to: sut)
         
         // Then
         let countResult = sut.constraints.count

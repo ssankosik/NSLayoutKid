@@ -24,7 +24,7 @@ extension DimensionsTests {
         sut.addSubview(view)
 
         // When
-        let constraint = view.nslk.anchorDimensions(
+        let constraint = view.lkd.anchorDimensions(
             to: sut,
             size: size)
 
@@ -45,12 +45,12 @@ extension DimensionsTests {
         let size = CGSize(side: 16)
         let view = UIView()
         sut.addSubview(view)
-        view.nslk.anchorDimensions(
+        view.lkd.anchorDimensions(
             to: sut,
             size: size)
 
         // When
-        let constraint = view.nslk.updateAnchorDimensions(
+        let constraint = view.lkd.updateAnchorDimensions(
             to: sut,
             toSize: size)
 
@@ -69,11 +69,11 @@ extension DimensionsTests {
         // Given
         let view = UIView()
         sut.addSubview(view)
-        view.nslk.anchorDimensions(to: sut)
+        view.lkd.anchorDimensions(to: sut)
         let count = sut.constraints.count
 
         // When
-        view.nslk.removeAnchorDimensions(to: sut)
+        view.lkd.removeAnchorDimensions(to: sut)
 
         // Then
         let countResult = sut.constraints.count

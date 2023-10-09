@@ -3,12 +3,12 @@ import UIKit
 class Spacer: UIView {
     convenience init(height: CGFloat, relation: NSLayoutConstraint.Relation = .equal) {
         self.init(frame: .zero)
-        nslk.anchor(dimension: .height, relation: relation, constant: height)
+        lkd.anchor(dimension: .height, relation: relation, constant: height)
     }
     
     convenience init(width: CGFloat, relation: NSLayoutConstraint.Relation = .equal) {
         self.init(frame: .zero)
-        nslk.anchor(dimension: .width, relation: relation, constant: width)
+        lkd.anchor(dimension: .width, relation: relation, constant: width)
     }
     
     override init(frame: CGRect) {

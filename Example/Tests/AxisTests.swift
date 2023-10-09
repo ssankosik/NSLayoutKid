@@ -29,7 +29,7 @@ extension AxisTests {
         sut.addSubview(view)
         
         // When
-        let constraint = view.nslk.anchor(
+        let constraint = view.lkd.anchor(
             axis: axis,
             relation: relation,
             to: sut,
@@ -69,13 +69,13 @@ extension AxisTests {
         // Given
         let view = UIView()
         sut.addSubview(view)
-        view.nslk.anchor(
+        view.lkd.anchor(
             axis: axis,
             to: sut,
             constant: constant)
         
         // When
-        let constraint = view.nslk.updateAnchor(
+        let constraint = view.lkd.updateAnchor(
             axis: axis,
             to: sut,
             toConstant: constant)
@@ -108,13 +108,13 @@ extension AxisTests {
         let axis = NSLK.Axis.top
         let view = UIView()
         sut.addSubview(view)
-        view.nslk.anchor(
+        view.lkd.anchor(
             axis: axis,
             to: sut)
         let count = sut.constraints.count
         
         // When
-        let constraint = view.nslk.removeAnchor(
+        let constraint = view.lkd.removeAnchor(
             axis: axis,
             to: sut)
         

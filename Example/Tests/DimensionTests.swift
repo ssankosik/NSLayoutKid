@@ -20,7 +20,7 @@ extension DimensionTests {
     func test_anchor_shouldReturnNotAnAttribute() {
         // When
         let dimension = NSLK.Dimension.width
-        let constraint = sut.nslk.anchor(dimension: dimension)
+        let constraint = sut.lkd.anchor(dimension: dimension)
 
         // Then
         let result = constraint?.secondAttribute == .notAnAttribute
@@ -34,7 +34,7 @@ extension DimensionTests {
         sut.addSubview(view)
 
         // When
-        let constraint = view.nslk.anchor(
+        let constraint = view.lkd.anchor(
             dimension: dimension,
             to: sut)
 
@@ -49,12 +49,12 @@ extension DimensionTests {
     func test_updateAnchor_shouldReturnNotAnAttribute() {
         // Given
         let dimension = NSLK.Dimension.width
-        sut.nslk.anchor(
+        sut.lkd.anchor(
             dimension: dimension,
             constant: 16)
         
         // When
-        let constraint = sut.nslk.updateAnchor(
+        let constraint = sut.lkd.updateAnchor(
             dimension: dimension,
             toConstant: 16)
 
@@ -68,13 +68,13 @@ extension DimensionTests {
         let dimension = NSLK.Dimension.width
         let view = UIView()
         sut.addSubview(view)
-        view.nslk.anchor(
+        view.lkd.anchor(
             dimension: dimension,
             to: sut,
             constant: 16)
 
         // When
-        let constraint = view.nslk.updateAnchor(
+        let constraint = view.lkd.updateAnchor(
             dimension: dimension,
             to: sut,
             toConstant: 16)
@@ -90,12 +90,12 @@ extension DimensionTests {
     func test_removeAnchor() {
         // Given
         let dimension = NSLK.Dimension.width
-        sut.nslk.anchor(
+        sut.lkd.anchor(
             dimension: dimension,
             constant: 16)
         
         // When
-        let constraint = sut.nslk.removeAnchor(
+        let constraint = sut.lkd.removeAnchor(
             dimension: dimension,
             constant: 16)
 
@@ -109,13 +109,13 @@ extension DimensionTests {
         let dimension = NSLK.Dimension.width
         let view = UIView()
         sut.addSubview(view)
-        view.nslk.anchor(
+        view.lkd.anchor(
             dimension: dimension,
             to: sut)
         let count = sut.constraints.count
         
         // When
-        let constraint = view.nslk.removeAnchor(
+        let constraint = view.lkd.removeAnchor(
             dimension: dimension,
             to: sut)
 

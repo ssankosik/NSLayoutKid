@@ -46,63 +46,63 @@ class MyViewController: UIViewController {
 **Setup Main View**  
 ```swift
 view.addSubview(mainView)
-mainView.nslk.anchor(axis: .top, to: view.safeAreaLayoutGuide)
-mainView.nslk.anchorToSuperView(axes: .bottom)
+mainView.lkd.anchor(axis: .top, to: view.safeAreaLayoutGuide)
+mainView.lkd.anchorToSuperView(axes: .bottom)
 ```
 
 **Setup Main Mutton**  
 ```swift
 mainView.addSubview(mainButton)
-mainButton.nslk.anchor(dimension: .height, constant: 50)
-mainButton.nslk.anchorToSuperView(axes: .bottom, insets: .init(x: 16, y: 40))
+mainButton.lkd.anchor(dimension: .height, constant: 50)
+mainButton.lkd.anchorToSuperView(axes: .bottom, insets: .init(x: 16, y: 40))
 ```
 
 ## Axis Anchor
 **Anchor**  
 ```swift
-view.nslk.anchor(axis: .top)
-view.nslk.anchor(axes: .top)
-view.nslk.anchorToSuperView(axis: .top)
-view.nslk.anchorToSuperView(axes: .top)
+view.lkd.anchor(axis: .top)
+view.lkd.anchor(axes: .top)
+view.lkd.anchorToSuperView(axis: .top)
+view.lkd.anchorToSuperView(axes: .top)
 ```
 
 **Update Anchor**  
 ```swift
-view.nslk.updateAnchor(axis: .top)
-view.nslk.updateAnchor(axes: .top)
-view.nslk.updateAnchorToSuperView(axis: .top)
-view.nslk.updateAnchorToSuperView(axes: .top)
+view.lkd.updateAnchor(axis: .top)
+view.lkd.updateAnchor(axes: .top)
+view.lkd.updateAnchorToSuperView(axis: .top)
+view.lkd.updateAnchorToSuperView(axes: .top)
 ```
 
 **Remove Anchor**  
 ```swift
-view.nslk.removeAnchor(axis: .top)
-view.nslk.removeAnchor(axes: .top)
-view.nslk.removeAnchorToSuperView(axis: .top)
-view.nslk.removeAnchorToSuperView(axes: .top)
+view.lkd.removeAnchor(axis: .top)
+view.lkd.removeAnchor(axes: .top)
+view.lkd.removeAnchorToSuperView(axis: .top)
+view.lkd.removeAnchorToSuperView(axes: .top)
 ```
 
 ## Dimension
 **Dimension**  
 ```swift
-view.nslk.anchor(dimension: .height, toItem: superview)
-view.nslk.anchorDimensions(toItem: superview)
-view.nslk.anchorToSuperView(dimension: .height)
-view.nslk.anchorToSuperViewDimensions()
+view.lkd.anchor(dimension: .height, toItem: superview)
+view.lkd.anchorDimensions(toItem: superview)
+view.lkd.anchorToSuperView(dimension: .height)
+view.lkd.anchorToSuperViewDimensions()
 ```
 
 **Update Dimension**  
 ```swift
-view.nslk.updateAnchor(dimension: .height, toItem: superview)
-view.nslk.updateAnchorDimensions(toItem: superview)
-view.nslk.updateAnchorToSuperView(dimension: .height)
-view.nslk.updateAnchorToSuperViewDimensions()
+view.lkd.updateAnchor(dimension: .height, toItem: superview)
+view.lkd.updateAnchorDimensions(toItem: superview)
+view.lkd.updateAnchorToSuperView(dimension: .height)
+view.lkd.updateAnchorToSuperViewDimensions()
 ```
 
 **Remove Dimension**  
 ```swift
-view.nslk.removeAnchor(dimension: .height, toItem: superview)
-view.nslk.removeAnchorDimensions(toItem: superview)
-view.nslk.removeAnchorToSuperView(dimension: .height)
-view.nslk.removeAnchorToSuperViewDimensions()
+view.lkd.removeAnchor(dimension: .height, toItem: superview)
+view.lkd.removeAnchorDimensions(toItem: superview)
+view.lkd.removeAnchorToSuperView(dimension: .height)
+view.lkd.removeAnchorToSuperViewDimensions()
 ```

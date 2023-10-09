@@ -11,7 +11,7 @@ class CardView: UIView {
         super.init(frame: frame)
         setupView()
         addSubview(contentView)
-        contentView.nslk.anchorToSuperView()
+        contentView.lkd.anchorToSuperView()
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

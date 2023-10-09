@@ -5,7 +5,7 @@ class ViewController: UIViewController {
     // UI
     private let centerView = UIView().apply({
         $0.backgroundColor = .gray
-        $0.nslk.anchorDimensions(size: .init(side: 100))
+        $0.lkd.anchorDimensions(size: .init(side: 100))
     })
     
     // VAR
@@ -18,7 +18,7 @@ class ViewController: UIViewController {
             let imageView = UIImageView().apply({
                 $0.backgroundColor = .grey03
                 $0.roundCorners(radius: 50)
-                $0.nslk.anchorDimensions(size: .init(side: 100))
+                $0.lkd.anchorDimensions(size: .init(side: 100))
             })
             let titleLabel = UILabel().apply({
                 $0.text = "Title"
@@ -41,14 +41,14 @@ class ViewController: UIViewController {
         func createDetailsView() -> UIView {
             CardView().apply({
                 $0.addSubview(centerView)
-                $0.nslk.anchor(dimension: .height, constant: 600)
-                centerView.nslk.anchorToSuperView(axes: .center)
+                $0.lkd.anchor(dimension: .height, constant: 600)
+                centerView.lkd.anchorToSuperView(axes: .center)
             })
         }
         
         let scrollView = StackContentScrollView().apply({
             $0.set(masksToBounds: false)
-            $0.stackView.nslk.updateAnchorToSuperView(toInsets: .init(inset: 16, top: 32, bottom: 40))
+            $0.stackView.lkd.updateAnchorToSuperView(toInsets: .init(inset: 16, top: 32, bottom: 40))
         })
         view.backgroundColor = .grey02
         view.addSubview(scrollView)
@@ -57,8 +57,8 @@ class ViewController: UIViewController {
             Spacer(height: 32),
             createDetailsView()
         ])
-        scrollView.nslk.anchor(axis: .top, to: view.safeAreaLayoutGuide)
-        scrollView.nslk.anchorToSuperView(axes: .bottom)
+        scrollView.lkd.anchor(axis: .top, to: view.safeAreaLayoutGuide)
+        scrollView.lkd.anchorToSuperView(axes: .bottom)
         navigationItem.title = "ViewController"
         
         let tap = UITapGestureRecognizer().apply({
@@ -69,6 +69,6 @@ class ViewController: UIViewController {
     
     @objc private func tapped() {
         counter += 1
-        centerView.nslk.updateAnchorDimensions(toSize: .init(side: counter.isEven ? 100 : 50))
+        centerView.lkd.updateAnchorDimensions(toSize: .init(side: counter.isEven ? 100 : 50))
     }
 }

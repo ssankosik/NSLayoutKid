@@ -3,7 +3,7 @@ import UIKit
 public protocol NSLKCompatible: AnyObject {}
 
 extension NSLKCompatible {
-    public var nslk: NSLKWrapper<Self> {
+    public var lkd: NSLKWrapper<Self> {
         get { return NSLKWrapper(self) }
         set {}
     }
